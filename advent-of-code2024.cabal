@@ -1,0 +1,42 @@
+cabal-version:      3.0
+
+name:               advent-of-code2024
+version:            0.1.0.0
+license:            MIT
+author:             cgduncan7
+
+build-type:         Simple
+
+common warnings
+    ghc-options: -Wall
+
+executable advent-of-code2024
+    import:           warnings
+    main-is:          Main.hs
+    other-modules:
+    build-depends:
+        advent-of-code2024,
+        base ^>=4.17.2.1
+    hs-source-dirs:   app
+    default-language: GHC2021
+
+library
+    exposed-modules:
+        -- library_target
+        Day1,
+        Day0,
+        Common
+    build-depends:
+        base ^>=4.17.2.1
+    hs-source-dirs: days 
+    default-language: GHC2021
+
+test-suite day0
+    default-language: GHC2021
+    type: exitcode-stdio-1.0
+    hs-source-dirs:   tests/day0
+    main-is:          Main.hs
+    build-depends:
+        advent-of-code2024,
+        base ^>=4.17.2.1,
+        hspec ^>=2.11.9
