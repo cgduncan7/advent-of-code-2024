@@ -2,6 +2,7 @@ module Main where
 
 import Common (Part (Both, P1, P2), Runner, stringToPart)
 import Day0
+import Day1
 import System.Console.GetOpt
 import System.Environment (getArgs)
 
@@ -37,6 +38,7 @@ emptyRunner :: Runner
 emptyRunner _ _ = []
 
 getDay :: String -> Runner
+getDay "1" = Day1.run
 getDay "0" = Day0.run
 getDay _ = emptyRunner
 

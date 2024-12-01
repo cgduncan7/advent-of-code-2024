@@ -27,7 +27,8 @@ library
         Day0,
         Common
     build-depends:
-        base ^>=4.17.2.1
+        base ^>=4.17.2.1,
+        containers ^>=0.6.7
     hs-source-dirs: days 
     default-language: GHC2021
 
@@ -35,6 +36,16 @@ test-suite day0
     default-language: GHC2021
     type: exitcode-stdio-1.0
     hs-source-dirs:   tests/day0
+    main-is:          Main.hs
+    build-depends:
+        advent-of-code2024,
+        base ^>=4.17.2.1,
+        hspec ^>=2.11.9
+
+test-suite day1
+    default-language: GHC2021
+    type: exitcode-stdio-1.0
+    hs-source-dirs:   tests/day1
     main-is:          Main.hs
     build-depends:
         advent-of-code2024,
