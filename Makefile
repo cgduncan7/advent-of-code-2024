@@ -2,7 +2,7 @@ new:
 ifdef day
 	@echo 'Making module for day $(day)'
 	@cp days/Day0.hs days/Day$(day).hs
-	@sed -i '' 's/Day0/Day$(day)/g' days/Day1.hs
+	@sed -i '' 's/Day0/Day$(day)/g' days/Day$(day).hs
 	@mkdir data/day$(day)
 	@touch data/day$(day)/data1.txt
 	@touch data/day$(day)/data2.txt
