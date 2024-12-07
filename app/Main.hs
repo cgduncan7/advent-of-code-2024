@@ -2,6 +2,7 @@ module Main where
 
 import Common (Part (Both, P1, P2), Runner, stringToPart)
 import Day0
+import Day6
 import Day5
 import Day4
 import Day3
@@ -42,6 +43,7 @@ emptyRunner :: Runner
 emptyRunner _ _ = []
 
 getDay :: String -> Runner
+getDay "6" = Day6.run
 getDay "5" = Day5.run
 getDay "4" = Day4.run
 getDay "3" = Day3.run

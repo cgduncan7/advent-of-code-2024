@@ -1,4 +1,4 @@
-module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, head', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds) where
+module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, head', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, move) where
 
 type Runner = Part -> [String] -> [Int]
 
@@ -33,6 +33,20 @@ type Location = (Int, Int)
 type Bounds = Location
 
 data Dir = UL | U | UR | R | DR | D | DL | L deriving (Show)
+
+move :: Bounds -> Location -> Dir -> Maybe Location
+move bounds (x, y) U = nothingIfLocOutOfBounds bounds (x, y - 1)
+move bounds (x, y) UL = nothingIfLocOutOfBounds bounds (x - 1, y - 1)
+move bounds (x, y) UR = nothingIfLocOutOfBounds bounds (x + 1, y - 1)
+move bounds (x, y) D = nothingIfLocOutOfBounds bounds (x, y + 1)
+move bounds (x, y) DL = nothingIfLocOutOfBounds bounds (x - 1, y + 1)
+move bounds (x, y) DR = nothingIfLocOutOfBounds bounds (x + 1, y + 1)
+move bounds (x, y) R = nothingIfLocOutOfBounds bounds (x + 1, y)
+move bounds (x, y) L = nothingIfLocOutOfBounds bounds (x - 1, y)
+
+nothingIfLocOutOfBounds :: Bounds -> Location -> Maybe Location
+nothingIfLocOutOfBounds (boundX, boundY) (locX, locY) = do
+  if locX < 0 || locY < 0 || locX >= boundX || locY >= boundY then Nothing else Just (locX, locY)
 
 nothingIfOutOfBounds :: Bounds -> Location -> Maybe Int
 nothingIfOutOfBounds (boundX, boundY) (locX, locY) = do
