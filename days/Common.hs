@@ -1,4 +1,4 @@
-module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, head', Location, Bounds, locationToIndex, indexToLocation) where
+module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, head', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds) where
 
 type Runner = Part -> [String] -> [Int]
 
@@ -31,6 +31,12 @@ head' (a : as) = Just a
 type Location = (Int, Int)
 
 type Bounds = Location
+
+data Dir = UL | U | UR | R | DR | D | DL | L deriving (Show)
+
+nothingIfOutOfBounds :: Bounds -> Location -> Maybe Int
+nothingIfOutOfBounds (boundX, boundY) (locX, locY) = do
+  if locX < 0 || locY < 0 || locX >= boundX || locY >= boundY then Nothing else Just (locationToIndex (boundX, boundY) (locX, locY))
 
 locationToIndex :: Bounds -> Location -> Int
 locationToIndex (boundX, _) (locX, locY) = locY * boundX + locX

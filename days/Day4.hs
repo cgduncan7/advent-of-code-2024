@@ -1,6 +1,6 @@
 module Day4 (run, part1, part2) where
 
-import Common (Bounds, Location, Part (P1, P2), Runner, indexToLocation, locationToIndex)
+import Common (Bounds, Dir (D, DL, DR, L, R, U, UL, UR), Location, Part (P1, P2), Runner, indexToLocation, locationToIndex, nothingIfOutOfBounds)
 import Data.Bifunctor (bimap)
 import Debug.Trace (trace, traceShow)
 
@@ -22,12 +22,6 @@ part2 input = do
   let bounds = (length $ head ls, length ls)
   let cls = concat ls
   length $ filter (checkIsMASCenter cls bounds) $ take (length cls) [0, 1 ..]
-
-data Dir = UL | U | UR | R | DR | D | DL | L deriving (Show)
-
-nothingIfOutOfBounds :: Bounds -> Location -> Maybe Int
-nothingIfOutOfBounds (boundX, boundY) (locX, locY) = do
-  if locX < 0 || locY < 0 || locX >= boundX || locY >= boundY then Nothing else Just (locationToIndex (boundX, boundY) (locX, locY))
 
 dirToNeighborIndex :: Bounds -> Dir -> Int -> Maybe Int
 dirToNeighborIndex (boundX, boundY) UL idx = nothingIfOutOfBounds (boundX, boundY) (bimap (+ (-1)) (+ (-1)) $ indexToLocation (boundX, boundY) idx)
