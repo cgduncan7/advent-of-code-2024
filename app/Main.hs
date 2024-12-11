@@ -2,12 +2,12 @@ module Main where
 
 import Common (Part (Both, P1, P2), Runner, stringToPart)
 import Day0
-import Day6
-import Day5
-import Day4
-import Day3
 import Day1
 import Day2
+import Day3
+import Day4
+import Day5
+import Day6
 import System.Console.GetOpt
 import System.Environment (getArgs)
 

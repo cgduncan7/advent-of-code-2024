@@ -17,7 +17,19 @@ example1 =
       "#.........",
       "......#..."
     ]
-example2 = ""
+example2 =
+  unlines
+    [ "....#.....",
+      ".........#",
+      "..........",
+      "..#.......",
+      ".......#..",
+      "..........",
+      ".#..^.....",
+      "........#.",
+      "#.........",
+      "......#..."
+    ]
 
 main :: IO ()
 main = hspec spec
@@ -29,4 +41,4 @@ spec = do
       part1 example1 `shouldBe` 41
   describe "part 2" $ do
     it "examples" $ do
-      part2 example2 `shouldBe` 2
+      part2 example2 `shouldBe` 6

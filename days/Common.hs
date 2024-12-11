@@ -1,5 +1,7 @@
 module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, head', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, move) where
 
+import Data.List (elemIndex, findIndex)
+
 type Runner = Part -> [String] -> [Int]
 
 data Part = P1 | P2 | Both deriving (Eq, Show)
@@ -32,7 +34,18 @@ type Location = (Int, Int)
 
 type Bounds = Location
 
-data Dir = UL | U | UR | R | DR | D | DL | L deriving (Show)
+data Dir = UL | U | UR | R | DR | D | DL | L deriving (Eq, Show)
+
+-- Dir are given a value started from 0 at UL and going clockwise for no good reason
+dirVals = [UL, U, UR, R, DR, D, DL, L] :: [Dir]
+
+instance Ord Dir where
+  (<) a b = elemIndex a dirVals < elemIndex b dirVals
+  (<=) a b = elemIndex a dirVals <= elemIndex b dirVals
+  (>) a b = elemIndex a dirVals > elemIndex b dirVals
+  (>=) a b = elemIndex a dirVals >= elemIndex b dirVals
+  max a b = if a >= b then a else b
+  min a b = if a >= b then b else a
 
 move :: Bounds -> Location -> Dir -> Maybe Location
 move bounds (x, y) U = nothingIfLocOutOfBounds bounds (x, y - 1)
