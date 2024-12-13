@@ -23,6 +23,7 @@ executable advent-of-code2024
 library
     exposed-modules:
         -- library_target
+        Day9,
         Day8,
         Day7,
         Day6,
@@ -124,6 +125,16 @@ test-suite day8
     default-language: GHC2021
     type: exitcode-stdio-1.0
     hs-source-dirs:   tests/day8
+    main-is:          Main.hs
+    build-depends:
+        advent-of-code2024,
+        base ^>=4.17.2.1,
+        hspec ^>=2.11.9
+
+test-suite day9
+    default-language: GHC2021
+    type: exitcode-stdio-1.0
+    hs-source-dirs:   tests/day9
     main-is:          Main.hs
     build-depends:
         advent-of-code2024,

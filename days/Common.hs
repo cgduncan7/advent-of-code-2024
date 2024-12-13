@@ -1,4 +1,4 @@
-module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, head', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, nothingIfLocOutOfBounds, move, distance, pathTo) where
+module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, head', last', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, nothingIfLocOutOfBounds, move, distance, pathTo, rest) where
 
 import Data.List (elemIndex, findIndex)
 
@@ -29,6 +29,10 @@ splitStringByFn s f = case dropWhile f s of
 head' :: [a] -> Maybe a
 head' [] = Nothing
 head' (a : as) = Just a
+
+last' :: [a] -> Maybe a
+last' [] = Nothing
+last' x = head' $ reverse x
 
 type Location = (Int, Int)
 
@@ -76,3 +80,6 @@ distance (ax, ay) (bx, by) = (((fromIntegral bx :: Float) - (fromIntegral ax :: 
 
 pathTo :: Location -> Location -> (Int, Int)
 pathTo (ax, ay) (bx, by) = (bx - ax, by - ay)
+
+rest :: [a] -> [a]
+rest (_ : r) = r
