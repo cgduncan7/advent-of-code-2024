@@ -1,4 +1,4 @@
-module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, head', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, move) where
+module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, head', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, nothingIfLocOutOfBounds, move, distance, pathTo) where
 
 import Data.List (elemIndex, findIndex)
 
@@ -70,3 +70,9 @@ locationToIndex (boundX, _) (locX, locY) = locY * boundX + locX
 
 indexToLocation :: Bounds -> Int -> Location
 indexToLocation (boundX, _) index = (index `mod` boundX, index `div` boundX)
+
+distance :: Location -> Location -> Float
+distance (ax, ay) (bx, by) = (((fromIntegral bx :: Float) - (fromIntegral ax :: Float)) + ((fromIntegral by :: Float) - (fromIntegral ay :: Float))) / 2
+
+pathTo :: Location -> Location -> (Int, Int)
+pathTo (ax, ay) (bx, by) = (bx - ax, by - ay)
