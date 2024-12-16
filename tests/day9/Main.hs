@@ -17,4 +17,4 @@ spec = do
       part1 example1 `shouldBe` 1928
   describe "part 2" $ do
     it "examples" $ do
-      part2 example2 `shouldBe` 2
+      part2 example2 `shouldBe` 2858
