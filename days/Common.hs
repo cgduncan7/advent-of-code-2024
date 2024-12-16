@@ -1,4 +1,4 @@
-module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, head', last', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, nothingIfLocOutOfBounds, move, distance, pathTo, rest) where
+module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, filterMaybes, head', last', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, nothingIfLocOutOfBounds, move, distance, pathTo, rest) where
 
 import Data.List (elemIndex, findIndex)
 
@@ -83,3 +83,9 @@ pathTo (ax, ay) (bx, by) = (bx - ax, by - ay)
 
 rest :: [a] -> [a]
 rest (_ : r) = r
+
+-- remove maybes
+filterMaybes :: [Maybe a] -> [a]
+filterMaybes (Nothing : rest) = filterMaybes rest
+filterMaybes (Just x : rest) = x : filterMaybes rest
+filterMaybes [] = []
