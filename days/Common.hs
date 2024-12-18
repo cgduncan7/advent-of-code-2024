@@ -1,4 +1,4 @@
-module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, filterMaybes, head', last', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, nothingIfLocOutOfBounds, move, distance, pathTo, rest) where
+module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, filterMaybes, head', last', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, nothingIfLocOutOfBounds, move, move', distance, pathTo, rest) where
 
 import Data.List (elemIndex, findIndex)
 
@@ -60,6 +60,16 @@ move bounds (x, y) DL = nothingIfLocOutOfBounds bounds (x - 1, y + 1)
 move bounds (x, y) DR = nothingIfLocOutOfBounds bounds (x + 1, y + 1)
 move bounds (x, y) R = nothingIfLocOutOfBounds bounds (x + 1, y)
 move bounds (x, y) L = nothingIfLocOutOfBounds bounds (x - 1, y)
+
+move' :: Location -> Dir -> Location
+move' (x, y) U = (x, y - 1)
+move' (x, y) UL = (x - 1, y - 1)
+move' (x, y) UR = (x + 1, y - 1)
+move' (x, y) D = (x, y + 1)
+move' (x, y) DL = (x - 1, y + 1)
+move' (x, y) DR = (x + 1, y + 1)
+move' (x, y) R = (x + 1, y)
+move' (x, y) L = (x - 1, y)
 
 nothingIfLocOutOfBounds :: Bounds -> Location -> Maybe Location
 nothingIfLocOutOfBounds (boundX, boundY) (locX, locY) = do
