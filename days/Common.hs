@@ -1,6 +1,6 @@
-module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, filterMaybes, head', last', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, nothingIfLocOutOfBounds, move, move', distance, pathTo, rest, isInteger) where
+module Common (splitStringByFn, stringToPart, Part (P1, P2, Both), Runner, filterMaybes, head', last', Location, Bounds, locationToIndex, indexToLocation, Dir (UL, U, UR, R, DR, D, DL, L), nothingIfOutOfBounds, nothingIfLocOutOfBounds, move, move', distance, pathTo, rest, isInteger, oppositeDir) where
 
-import Data.List (elemIndex, findIndex)
+import Data.List (elemIndex)
 
 type Runner = Part -> [String] -> [Int]
 
@@ -42,6 +42,11 @@ data Dir = UL | U | UR | R | DR | D | DL | L deriving (Eq, Show)
 
 -- Dir are given a value started from 0 at UL and going clockwise for no good reason
 dirVals = [UL, U, UR, R, DR, D, DL, L] :: [Dir]
+
+oppositeDir :: Dir -> Dir
+oppositeDir d = case elemIndex d dirVals of
+  Just i -> dirVals !! ((i + 4) `mod` 8)
+  Nothing -> error "something bad"
 
 instance Ord Dir where
   (<) a b = elemIndex a dirVals < elemIndex b dirVals
